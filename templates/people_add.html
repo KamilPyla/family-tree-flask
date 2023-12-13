@@ -6,15 +6,29 @@
 
 {% block content %}
 <form method="post">
-	Imię: <input type="text" name="firstName"></input><br>
-	Nazwisko: <input type="text" name="lastName"</input><br>
-	Płeć: <select name="gender">
-			<option></option>
+	<div class="field">
+		<label class="label" for="firstName">Imię:</label>
+		<input class="input is-link" type="text" name="firstName"></input>
+	</div>
+	<div class="field">
+		<label class="label" for="lastName">Nazwisko:</label>
+		<input class="input is-link" type="text" name="lastName"></input>
+	</div>
+	<div class="field">
+		<label class="label" for="gender">Płeć:</label>
+		<select class="input is-link" id="gender" name="gender">
 			<option>Mężczyzna</option>
 			<option>Kobieta</option>
-	</select><br>
-	Data urodzenia: <input type="date" name="birthDate"></input><br>
-	Data śmierci: <input type="date" name="deathDate"></input><br>
-	<button type="submit">Dodaj</button>
+		</select><br>
+	</div>
+	<div class="field">
+		<label class="label" for="birthDate">Data urodzenia:</label>
+		<input class="input is-link" id="birthDate" type="date" name="birthDate"></input><br>
+	</div>
+	<div class="field">
+		<label class="label" for="deathDate">Data śmierci:</label>
+		<input class="input is-link" id="deathDate" type="date" name="deathDate"></input><br>
+	</div>
+	<button class="button is-primary" type="submit">Dodaj</button>
 </form>
 {% endblock %}

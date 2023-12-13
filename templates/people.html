@@ -12,12 +12,12 @@
 {% if 'deathDate' in person %}Data śmierci: {{ person['deathDate'] }}<br>{% endif %}
 <br>
 {% if mother %}
-Matka: <a class="button is-primary is-light my-2" href="/people/{{ mother['personID'] }}">{{ mother['firstName'] }} {{ mother['lastName'] }}</a><br>
+Matka: <a class="button is-danger mx-2" href="/people/{{ mother['personID'] }}">{{ mother['firstName'] }} {{ mother['lastName'] }}</a><br>
 {% else %}
-Matka: <a class="button is-link mx-2" href="{{ person['personID'] }}/mother">Dodaj matkę</a><br>
+Matka: <a class="button is-danger mx-2" href="{{ person['personID'] }}/mother">Dodaj matkę</a><br>
 {% endif %}
 {% if father %}
-Ojciec: <a href="/people/{{ father['personID'] }}">{{ father['firstName'] }} {{ father['lastName'] }}</a><br>
+Ojciec: <a class="button is-info mx-2 my-1" href="/people/{{ father['personID'] }}">{{ father['firstName'] }} {{ father['lastName'] }}</a><br>
 {% else %}
 Ojciec: <a class="button is-info mx-2 my-1" href="{{ person['personID'] }}/father">Dodaj ojca</a><br>
 {% endif %}
