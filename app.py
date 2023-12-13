@@ -1,10 +1,10 @@
 import os
 from flask import Flask, render_template, redirect, request
-from database import DatabaseRef
+from database import Database
 
 app = Flask(__name__)
 
-db = DatabaseRef(os.environ['DB_URI'], os.environ['DB_USER'],
+db = Database(os.environ['DB_URI'], os.environ['DB_USER'],
               os.environ['DB_PASSWORD'])
 
 @app.route('/')
