@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ person['firstName'] }} {{ person['lastName'] }}{% endblock %}
+
+{% block header %}<a class="button is-primary is-light my-2" href="/people/{{ person['personID'] }}">{{ person['firstName'] }} {{ person['lastName'] }}</a>{% endblock %}
+
+{% block content %}
+{% if 'firstName' in person %}Imię: {{ person['firstName'] }}<br>{% endif %}
+{% if 'lastName' in person %}Nazwisko: {{ person['lastName'] }}<br>{% endif %}
+{% if 'gender' in person %}Płeć: {{ person['gender'] }}<br>{% endif %}
+{% if 'birthDate' in person %}Data urodzenia: {{ person['birthDate'] }}<br>{% endif %}
+{% if 'deathDate' in person %}Data śmierci: {{ person['deathDate'] }}<br>{% endif %}
+<br>
+{% if mother %}
+Matka: <a class="button is-primary is-light my-2" href="/people/{{ mother['personID'] }}">{{ mother['firstName'] }} {{ mother['lastName'] }}</a><br>
+{% else %}
+Matka: <a class="button is-link mx-2" href="{{ person['personID'] }}/mother">Dodaj matkę</a><br>
+{% endif %}
+{% if father %}
+Ojciec: <a href="/people/{{ father['personID'] }}">{{ father['firstName'] }} {{ father['lastName'] }}</a><br>
+{% else %}
+Ojciec: <a class="button is-info mx-2 my-1" href="{{ person['personID'] }}/father">Dodaj ojca</a><br>
+{% endif %}
+<br>
+<a class="button is-primary is-light my-2" href="{{ person['personID'] }}/marriages">Pokaż małżeństwa</a><br>
+<a class="button is-link my-2" href="{{ person['personID'] }}/edit">Edytuj</a><br>
+{% if mother %}<a class="button is-danger my-1" href="{{ person['personID'] }}/mother/delete">Usuń matkę</a><br>{% endif %}
+{% if father %}<a class="button is-danger my-1" href="{{ person['personID'] }}/father/delete">Usuń ojca</a><br>{% endif %}
+<a class="button is-danger" href="{{ person['personID'] }}/delete">Usuń</a>
+{% endblock %}

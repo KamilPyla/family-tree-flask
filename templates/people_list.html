@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista osób{% endblock %}
+
+{% block header %}Lista osób{% endblock %}
+
+{% block content %}
+{% for p in people %}
+	<a class="button is-primary is-light my-2" href="/people/{{ p['personID'] }}">{{ p['firstName'] }} {{ p['lastName'] }}</a><br>
+{% endfor %}
+{% endblock %}

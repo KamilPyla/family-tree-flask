@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Wybór ojca {{ person['firstName'] }} {{ person['lastName'] }}{% endblock %}
+
+{% block header %}Wybór ojca <a href="/people/{{ person['personID'] }}">{{ person['firstName'] }} {{ person['lastName'] }}</a>{% endblock %}
+
+{% block content %}
+<form method="post">
+	{% for p in people %}
+		<input type="radio" id="{{ p['personID'] }}" name="otherID" value="{{ p['personID'] }}">
+		<label for="{{ p['personID'] }}">{{ p['firstName'] }} {{ p['lastName'] }}</label><br>
+	{% endfor %}
+	<br>
+	<button type="submit">Zapisz</button>
+</form>
+{% endblock %}

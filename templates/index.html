@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Strona główna {% endblock %}
+
+{% block header %} Strona główna {% endblock %}
+
+{% block content %}
+	<a class="button is-link is-light my-1" href="/people">Lista wszystkich osób</a><br>
+	<a class="button is-link is-light my-1" href="/people/male">Lista mężczyzn</a><br>
+	<a class="button is-link is-light my-1" href="/people/female">Lista kobiet</a><br>
+	<a class="button is-link is-light my-1" href="/people/alive">Lista żyjących osób</a><br>
+	<a class="button is-link is-light my-1" href="/people/dead">Lista zmarłych osób</a><br>
+	<a class="button is-link is-light my-1" href="/people/alone">Lista osób bez aktualnego małżeństwa</a><br>
+	<a class="button is-link is-light my-1" href="/people/add">Dodaj osobę</a>
+{% endblock %}

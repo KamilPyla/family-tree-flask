@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Edycja {{ person['firstName'] }} {{ person['lastName'] }}{% endblock %}
+
+{% block header %}Edycja <a href="/people/{{ person['personID'] }}">{{ person['firstName'] }} {{ person['lastName'] }}</a>{% endblock %}
+
+{% block content %}
+<form method="post">
+	<div class="field">
+		<label class="label" for="firstName">Imię:</label>
+		<input id="firstName" type="text" name="firstName" value="{{ person['firstName'] }}"></input><br>
+	</div>
+	<div class="field">
+		<label class="label" for="lastName">Nazwisko:</label>
+		<input id="lastName" type="text" name="lastName" value="{{ person['lastName'] }}"></input><br>
+	</div>
+	<div class="field">
+		<label class="label" for="gender">Płeć:</label>
+		<select id="gender" name="gender">
+			<option></option>
+			<option {% if person['gender']=='Mężczyzna' %} selected {% endif %}>Mężczyzna</option>
+			<option {% if person['gender']=='Kobieta' %} selected {% endif %}>Kobieta</option>
+		</select><br>
+	</div>
+
+	<div class="field">
+		<label class="label" for="birthDate">Data urodzenia:</label>
+		<input id="birthDate" type="date" name="birthDate" value="{{ person['birthDate'] }}"></input><br>
+	</div>
+	<div class="field">
+		<label class="label" for="deathDate">Data śmierci:</label>
+		<input id="deathDate" type="date" name="deathDate" value="{{ person['deathDate'] }}"></input><br>
+	</div>
+	<br>
+	<button type="submit">Zapisz</button>
+</form>
+{% endblock %}
