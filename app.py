@@ -120,7 +120,7 @@ def people_mother(id):
 
 	return render_template('people_mother.html',
 													person=db.get_person(id),
-													people=db.get_people_except(id))
+													people=db.get_people_by_gender_except("Kobieta",id))
 
 
 @app.route('/people/<id>/mother/delete')
@@ -138,12 +138,10 @@ def people_father(id):
 
 	return render_template('people_father.html',
 													person=db.get_person(id),
-													people=db.get_people_except(id))
+													people=db.get_people_by_gender_except("Mężczyzna",id))
 
 
 @app.route('/people/<id>/father/delete')
 def people_father_delete(id):
 	db.delete_father(id)
 	return redirect('/people/' + id)
-
-

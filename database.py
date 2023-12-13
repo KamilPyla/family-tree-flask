@@ -8,9 +8,12 @@ class Database:
 	def close(self):
 		self.driver.close()
 
-	def run_query(self, query, **parameters):
+	def run_query(self, query, single = False, **parameters):
 		with self.driver.session() as session:
-			return session.run(query, **parameters).value()
+			if not single:
+				return session.run(query, **parameters).value()
+			else:
+				return session.run(query, **parameters).single()
 
 	def get_people_all(self):
 		return self.run_query('MATCH (p:Person) RETURN p')
@@ -33,6 +36,10 @@ class Database:
 
 	def get_people_except(self, person_id):
 		query = 'MATCH (p:Person) WHERE p.personID <> $id RETURN p'
+		return self.run_query(query, id=person_id)
+	
+	def get_people_by_gender_except(self, gender, person_id):
+		query = f'MATCH (p:Person {{gender: "{gender}"}}) where p.personID <> $id RETURN p'
 		return self.run_query(query, id=person_id)
 
 	def get_person(self, person_id):
@@ -62,7 +69,8 @@ class Database:
 			query += query_set[:-1]
 
 		query += ' RETURN p.personID'
-		return self.run_query(query, **parameters).value()['p.personID']
+		
+		return self.run_query(query, single=True, **parameters)['p.personID']
 
 	def edit_person(self, person_id, first_name, last_name, gender, birth_date, death_date):
 		query_set, query_remove = '', ''
@@ -113,9 +121,8 @@ class Database:
 			query1 += query_set[:-1] + ' RETURN m.marriageID'
 			query2 += query_set[:-1]
 
-		with self.driver.session() as session:
-			marriage_id = self.run_query(query1, **parameters).single()['m.marriageID']
-			self.run_query(query2, marriageID=marriage_id, **parameters)
+		marriage_id = self.run_query(query1, **parameters).single()['m.marriageID']
+		self.run_query(query2, marriageID=marriage_id, **parameters)
 
 	def get_marriages(self, person_id):
 		query = 'MATCH (:Person {personID: $id})-[m:MARRIED]->(o:Person) RETURN m, o'
@@ -132,19 +139,17 @@ class Database:
 		if not other_id.strip():
 			return
 
-		with self.driver.session() as session:
-			session.run(query, **parameters)
+		self.run_query(query, **parameters)
 
 	def get_relative(self, relationship_type, person_id):
 		query = f'MATCH (:Person {{personID: $id}})-[:{relationship_type}]->(r:Person) RETURN r'
-		with self.driver.session() as session:
-				result = session.run(query, id=person_id).value()
-				return result[0] if len(result) > 0 else None
+
+		result = self.run_query(query, id=person_id)
+		return result[0] if len(result) > 0 else None
 
 	def delete_relative(self, relationship_type, person_id):
 		query = f'MATCH (:Person {{personID: $id}})-[r:{relationship_type}]-() DELETE r'
-		with self.driver.session() as session:
-			session.run(query, id=person_id)
+		self.run_query(query, id=person_id)
 
 	def add_mother(self, person_id, mother_id):
 		self.add_relative('MOTHER', person_id, mother_id)
