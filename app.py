@@ -1,10 +1,10 @@
 import os
 from flask import Flask, render_template, redirect, request
-from database import Database
+from neo4j_database import Neo4jDatabase
 
 app = Flask(__name__)
 
-db = Database(os.environ['DB_URI'], os.environ['DB_USER'],
+db = Neo4jDatabase(os.environ['DB_URI'], os.environ['DB_USER'],
               os.environ['DB_PASSWORD'])
 
 @app.route('/')

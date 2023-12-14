@@ -1,7 +1,8 @@
 from neo4j import GraphDatabase
 from neo4j.time import Date
 from dateutil.parser import parse
-class Database:
+
+class Neo4jDatabase:
 	def __init__(self, uri, user, password):
 		self.driver = GraphDatabase.driver(uri, auth=(user, password))
 
