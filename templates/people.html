@@ -22,9 +22,11 @@ Ojciec: <a class="button is-info mx-2 my-1" href="/people/{{ father['personID'] 
 Ojciec: <a class="button is-info mx-2 my-1" href="{{ person['personID'] }}/father">Dodaj ojca</a><br>
 {% endif %}
 <br>
-<a class="button is-primary is-light my-2" href="{{ person['personID'] }}/marriages">Pokaż małżeństwa</a><br>
-<a class="button is-link my-2" href="{{ person['personID'] }}/edit">Edytuj</a><br>
-{% if mother %}<a class="button is-danger my-1" href="{{ person['personID'] }}/mother/delete">Usuń matkę</a><br>{% endif %}
-{% if father %}<a class="button is-danger my-1" href="{{ person['personID'] }}/father/delete">Usuń ojca</a><br>{% endif %}
-<a class="button is-danger" href="{{ person['personID'] }}/delete">Usuń</a>
+<a class="button is-link is-light my-2" href="{{ person['personID'] }}/marriages">Pokaż małżeństwa</a><br>
+<div class="field is-grouped">
+  {% if mother %}<a class="button is-danger is-outlined mx-1" href="{{ person['personID'] }}/mother/delete">Usuń matkę</a><br>{% endif %}
+  {% if father %}<a class="button is-danger is-outlined mx-1" href="{{ person['personID'] }}/father/delete">Usuń ojca</a><br>{% endif %}
+  <a class="button is-link mx-1" href="{{ person['personID'] }}/edit">Edytuj</a><br>
+  <a class="button is-danger mx-1" href="{{ person['personID'] }}/delete">Usuń</a>
+</div>
 {% endblock %}

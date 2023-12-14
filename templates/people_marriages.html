@@ -9,8 +9,7 @@
 	<a class="button is-primary is-light my-2" href="/people/{{ m.end_node['personID'] }}">{{ m.end_node['firstName'] }} {{ m.end_node['lastName'] }}</a><br>
 	{% if 'marriageDate' in m %}Zawarcie małżeństwa: {{ m['marriageDate'] }}<br>{% endif %}
 	{% if 'marriageEndDate' in m %}Zerwanie małżeństwa: {{ m['marriageEndDate'] }}<br>{% endif %}
-	<a class="button is-danger is-light my-2" href="marriages/{{ m['marriageID'] }}/delete">Usuń małżeństwo</a><br>
-	<br>
+	<a class="button is-danger is-light my-1" href="marriages/{{ m['marriageID'] }}/delete">Usuń małżeństwo</a><br>
 {% endfor %}
-<a href="marry">Dodaj małżeństwo</a>
+<a class="button is-link is-light my-2" href="marry">Dodaj małżeństwo</a>
 {% endblock %}
