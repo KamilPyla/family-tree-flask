@@ -34,7 +34,7 @@ def people_alive():
 
 @app.route('/people/dead')
 def people_dead():
-	return render_template('people_list.html', people=db.get_people_dead())
+	return render_template('people_dead_list.html', people=db.get_people_dead())
 
 
 @app.route('/people/alone')
